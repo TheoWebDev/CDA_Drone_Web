@@ -1,3 +1,4 @@
+
 import React from 'react';
 import './Footer.css';
 import { Link } from 'react-router-dom';
@@ -11,17 +12,17 @@ function Footer() {
                     <div className="col-sm-6 col-md-3 item">
                         <h3>SERVICES</h3>
                         <ul>
-                            <li><a href="#">Location</a></li>
-                            <li><a href="#">Pilotage</a></li>
-                            <li><a href="#">Relevés de données</a></li>
+                            <li><a href="/">Location</a></li>
+                            <li><a href="/">Pilotage</a></li>
+                            <li><a href="/">Relevés de données</a></li>
                         </ul>
                     </div>
                     <div className="col-sm-6 col-md-3 item">
                         <h3>A PROPOS</h3>
                         <ul>
-                            <li><a href="#">Notre équipe</a></li>
-                            <li><a href="#">Réalisations de nos clients</a></li>
-                            <li><a href="#">Mentions légales</a></li>
+                            <li><a href="/">Notre équipe</a></li>
+                            <li><a href="/">Réalisations de nos clients</a></li>
+                            <li><a href="/">Mentions légales</a></li>
                         </ul>
                     </div>
                     <div className="col-md-6 item text">

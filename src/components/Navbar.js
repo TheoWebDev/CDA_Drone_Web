@@ -10,7 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate()
   const { isEmpty, totalItems } = useCart()
   const [click, setClick] = useState(false)
-  const [button, setButton] = useState(true)
+  const [, setButton] = useState(true)
   const [state, dispatch] = useGlobalState()
   const auth = localStorage.getItem('user')
   const authParsed = JSON.parse(auth)
