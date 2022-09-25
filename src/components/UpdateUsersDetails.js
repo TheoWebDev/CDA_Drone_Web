@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './RegisterSection.css'
 
 
@@ -38,7 +38,7 @@ const UpdateUsersDetails = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         const fetchData = async () => {
-            const data = await fetch(`http://127.0.0.1:3000/api/v1/users/${authParsed.user._id}`, {
+            const data = await fetch(`${process.env.REACT_APP_BASE_URL}/users/${authParsed.user._id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

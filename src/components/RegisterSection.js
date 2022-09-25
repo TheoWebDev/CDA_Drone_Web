@@ -23,7 +23,7 @@ const RegisterSection = () => {
     const navigate = useNavigate()
 
     const collectData = async () => {
-        let result = await fetch(`http://127.0.0.1:3000/api/v1/signup`, {
+        let result = await fetch(`${process.env.REACT_APP_BASE_URL}/signup`, {
             method: 'post',
             body: JSON.stringify(
                 {
@@ -48,8 +48,8 @@ const RegisterSection = () => {
         result = await result.json()
         if (result) {
             localStorage.setItem('user', JSON.stringify(result))
-            alert('Votre compte a été crée avec succès !')
-            navigate('/dashboard')
+            alert('Compte crée avec succès. Connectez-vous dès à présent !')
+            navigate('/sign-in')
         } else {
             alert("NOPE")
             navigate('/')

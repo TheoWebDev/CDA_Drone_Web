@@ -10,7 +10,7 @@ function UsersDetails() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await fetch(`http://127.0.0.1:3000/api/v1/users/${authParsed.user._id}`, {
+            const data = await fetch(`${process.env.REACT_APP_BASE_URL}users/${authParsed.user._id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
