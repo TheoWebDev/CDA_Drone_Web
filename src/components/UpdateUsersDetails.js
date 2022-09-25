@@ -19,6 +19,8 @@ const UpdateUsersDetails = () => {
             company_u: authParsed.user.company_u,
             phone_u: authParsed.user.phone_u,
             address_u: authParsed.user.address_u,
+            zipCode_u: authParsed.user.zipCode_u,
+            country_u: authParsed.user.country_u,
             siret_u: authParsed.user.siret_u,
         }
     )
@@ -36,7 +38,7 @@ const UpdateUsersDetails = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         const fetchData = async () => {
-            const data = await fetch(`${process.env.REACT_APP_BASE_URL}/users/${authParsed.user._id}`, {
+            const data = await fetch(`http://127.0.0.1:3000/api/v1/users/${authParsed.user._id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -152,6 +154,36 @@ const UpdateUsersDetails = () => {
                                 placeholder={authParsed.user.address_u}
                                 name="address_u"
                                 value={formData.address_u}
+                                onChange={event => handleInputChange(event)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className='row mb-3 justify-content-center fs-5'>
+                        <label htmlFor="staticAddress" className="col-3 col-md-2 col-form-label">Code Postale</label>
+                        <div className="col-9 col-md-6">
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="staticAddress"
+                                placeholder={authParsed.user.zipCode_u}
+                                name="zipCode_u"
+                                value={formData.zipCode_u}
+                                onChange={event => handleInputChange(event)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className='row mb-3 justify-content-center fs-5'>
+                        <label htmlFor="staticAddress" className="col-3 col-md-2 col-form-label">Pays</label>
+                        <div className="col-9 col-md-6">
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="staticAddress"
+                                placeholder={authParsed.user.country_u}
+                                name="country_u"
+                                value={formData.country_u}
                                 onChange={event => handleInputChange(event)}
                             />
                         </div>

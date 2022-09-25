@@ -20,7 +20,7 @@ const SignInSection = () => {
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            const login = await fetch(`${process.env.REACT_APP_BASE_URL}/login`, {
+            const login = await fetch(`http://127.0.0.1:3000/api/v1/login`, {
                 method: 'post',
                 body: JSON.stringify({ email, password }),
                 headers: {

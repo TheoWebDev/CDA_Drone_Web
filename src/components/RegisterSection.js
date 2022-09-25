@@ -13,6 +13,8 @@ const RegisterSection = () => {
     const [company_u, setCompany] = useState('')
     const [phone_u, setPhone] = useState('')
     const [address_u, setAdress] = useState('')
+    const [zipCode_u, setZipCode] = useState('')
+    const [country_u, setCountry] = useState('')
     const [siret_u, setSiret] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState("")
@@ -21,7 +23,7 @@ const RegisterSection = () => {
     const navigate = useNavigate()
 
     const collectData = async () => {
-        let result = await fetch(`${process.env.REACT_APP_BASE_URL}/signup`, {
+        let result = await fetch(`http://127.0.0.1:3000/api/v1/signup`, {
             method: 'post',
             body: JSON.stringify(
                 {
@@ -30,6 +32,8 @@ const RegisterSection = () => {
                     company_u,
                     phone_u,
                     address_u,
+                    zipCode_u,
+                    country_u,
                     siret_u,
                     email,
                     password,
@@ -103,6 +107,22 @@ const RegisterSection = () => {
                             name="address_u"
                             onChange={(e) => setAdress(e.target.value)}
                             placeholder="Adresse de votre entreprise"
+                        />
+                        <input
+                            className="inputBox"
+                            type='text'
+                            value={zipCode_u}
+                            name="zipCode_u"
+                            onChange={(e) => setZipCode(e.target.value)}
+                            placeholder="CP"
+                        />
+                        <input
+                            className="inputBox"
+                            type='text'
+                            value={country_u}
+                            name="country_u"
+                            onChange={(e) => setCountry(e.target.value)}
+                            placeholder="Pays"
                         />
                     </div>
                     <div className="inputLogin">

@@ -26,12 +26,8 @@ function Cart() {
     const [message, setMessage] = useState()
     const {
         isEmpty,
-        totalUniqueItems,
         items,
-        updateItemQuantity,
         removeItem,
-        cartTotal,
-        totalItems
     } = useCart()
 
     const [totalDays, setTotalDays] = useState(0)
