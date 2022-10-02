@@ -5,24 +5,22 @@ import './RegisterSection.css'
 import { useNavigate } from "react-router-dom"
 import { useGlobalState } from '../App'
 import { notify, ToastRenderer } from '../components/ToastNotification'
+import { useForm } from "react-hook-form";
 
 const SignInSection = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const navigate = useNavigate()
     const [state, dispatch] = useGlobalState()
+    const navigate = useNavigate()
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [message, setMessage] = useState({
         data: 'Email ou mot de passe incorrect',
         type: 'error'
     })
-    const [validForm, setValidForm] = useState(true)
-
-    const handleLogin = async (e) => {
-        e.preventDefault()
+    
+    const onSubmit = async (data) => {
         try {
             const login = await fetch(`${process.env.REACT_APP_BASE_URL}/login`, {
                 method: 'post',
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -33,14 +31,12 @@ const SignInSection = () => {
             if (hasError) {
                 localStorage.removeItem('user')
                 dispatch({ auth: false })
-                setValidForm(true)
                 setMessage({
                     data: 'Email ou mot de passe incorrect',
                     type: 'error'
                 })
                 toastCall(message.type)
-            }
-            else {
+            } else {
                 localStorage.setItem('user', JSON.stringify(result))
                 dispatch({ auth: true })
                 setMessage({
@@ -55,11 +51,7 @@ const SignInSection = () => {
         }
     }
 
-
-
-    /**
-     * Genere un toast selon l'etat du formulaire
-     */
+    // Genere un toast selon l'etat du formulaire
     const toastCall = (messageData, messageType) => {
         messageData = message.data
         messageType = message.type
@@ -72,32 +64,37 @@ const SignInSection = () => {
                 <div className="test">
                     <h1 className="titleRegister">S'identifier</h1>
                     <div className="inputLoginTest">
-                        <input
-                            className="inputBox form-control"
-                            name="email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            type='email'
-                            placeholder="EMAIL"
-                            required
-                        />
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <label>EMAIL</label>
                         <input
                             className="inputBox"
-                            name="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            type='password'
-                            placeholder="MOT DE PASSE"
-                            required
+                            {...register("email", {
+                            required: true,
+                            maxLength: 20,
+                            })}
                         />
-                    </div>
-                    <div className="d-flex justify-content-center pt-5">
-                        <button
-                            type="button"
-                            onClick={handleLogin}
-                            className="submitBox">
-                            CONNEXION
-                        </button>
+                        {errors?.email?.type === "required" && <p>Champs requis</p>}
+                        {/* {errors?.email?.type === "pattern" && (
+                            <p>Adresse email non valide</p>
+                        )} */}
+                        <label>PASSWORD</label>
+                        <input
+                            className="inputBox"
+                            type='password'
+                            {...register("password", {
+                                required: true,
+                            })}
+                        />
+                        {/* {errors?.password?.type === "pattern" && (
+                            <p>Mot de passe non valide</p>
+                        )} */}
+                         <div className="d-flex justify-content-center">
+                             <input
+                                className="submitBox"
+                                type="submit"
+                            />
+                        </div>
+                    </form>
                     </div>
                 </div>
                 <ToastRenderer />
