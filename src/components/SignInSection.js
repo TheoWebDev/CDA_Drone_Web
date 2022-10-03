@@ -60,43 +60,36 @@ const SignInSection = () => {
 
     return (
         <>
-            <div className="signin-container">
-                <div className="test">
-                    <h1 className="titleRegister">S'identifier</h1>
-                    <div className="inputLoginTest">
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <label>EMAIL</label>
-                        <input
-                            className="inputBox"
-                            {...register("email", {
+            <div className="signup-container ">
+                <form className="testform" onSubmit={handleSubmit(onSubmit)}>
+                <legend className="titleRegister">Connexion</legend>
+                    <label>Adresse email :</label>
+                    <input
+                    className="inputBox"
+                    placeholder="EMAIL"
+                        {...register("email", {
                             required: true,
-                            maxLength: 20,
-                            })}
-                        />
-                        {errors?.email?.type === "required" && <p>Champs requis</p>}
-                        {/* {errors?.email?.type === "pattern" && (
-                            <p>Adresse email non valide</p>
-                        )} */}
-                        <label>PASSWORD</label>
+                        })}
+                    />
+                    {errors?.email?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    <label>Mot de passe :</label>
+                    <input
+                    type='password'
+                    className="inputBox"
+                    placeholder="MOT DE PASSE"
+                        {...register("password", {
+                            required: true,
+                        })}
+                    />
+                    {errors?.password?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                        
+                    <div className="d-flex justify-content-center">
                         <input
-                            className="inputBox"
-                            type='password'
-                            {...register("password", {
-                                required: true,
-                            })}
+                            className="submitBox"
+                            type="submit"
                         />
-                        {/* {errors?.password?.type === "pattern" && (
-                            <p>Mot de passe non valide</p>
-                        )} */}
-                         <div className="d-flex justify-content-center">
-                             <input
-                                className="submitBox"
-                                type="submit"
-                            />
-                        </div>
-                    </form>
                     </div>
-                </div>
+                </form>
                 <ToastRenderer />
             </div>
         </>

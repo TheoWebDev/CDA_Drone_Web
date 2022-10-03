@@ -1,45 +1,18 @@
-import React, { useState } from "react"
+import React from "react"
 import '../App.css'
 import './RegisterSection.css'
-
 import { useNavigate } from "react-router-dom"
-import PasswordChecklist from "react-password-checklist"
+import { useForm } from "react-hook-form";
 
 
 const RegisterSection = () => {
-    // const regexMail = /^[a-z0-9.-]+[@]{1}[a-z0-9.-]+[.]{1}[a-z]{2,4}$/
-    const [lastName_u, setLastName] = useState('')
-    const [firstName_u, setFirstName] = useState('')
-    const [company_u, setCompany] = useState('')
-    const [phone_u, setPhone] = useState('')
-    const [address_u, setAdress] = useState('')
-    const [zipCode_u, setZipCode] = useState('')
-    const [country_u, setCountry] = useState('')
-    const [siret_u, setSiret] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState("")
-    const [passwordAgain, setPasswordAgain] = useState("")
-    const [key_r, setKey_r] = useState('3')
     const navigate = useNavigate()
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const collectData = async () => {
+    const onSubmit = async (data) => {
         let result = await fetch(`${process.env.REACT_APP_BASE_URL}/signup`, {
             method: 'post',
-            body: JSON.stringify(
-                {
-                    lastName_u,
-                    firstName_u,
-                    company_u,
-                    phone_u,
-                    address_u,
-                    zipCode_u,
-                    country_u,
-                    siret_u,
-                    email,
-                    password,
-                    key_r
-                }
-            ),
+            body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -51,141 +24,196 @@ const RegisterSection = () => {
             alert('Compte crée avec succès. Connectez-vous dès à présent !')
             navigate('/sign-in')
         } else {
-            alert("NOPE")
+            alert("Une erreur est servenue, veuillez réessayer")
             navigate('/')
         }
     }
 
-
-
     return (
         <>
             <div className="signup-container ">
-                <h1 className="titleRegister">N'y allons pas par 4 chemins</h1>
-                <div className="background d-flex justify-content-center">
-                    <div className="inputLogin">
-                        <input
-                            className="inputBox"
-                            name="lastName_u"
-                            type='text'
-                            value={lastName_u}
-                            onChange={(e) => setLastName(e.target.value)}
-                            placeholder="Votre Nom"
-                        />
-                        <input
-                            className="inputBox"
-                            name="firstName_u"
-                            type='text'
-                            value={firstName_u}
-                            onChange={(e) => setFirstName(e.target.value)}
-                            placeholder="Votre Prénom"
-                        />
-                    </div>
-                    <div className="inputLogin">
-                        <input
-                            className="inputBox"
-                            name="company_u"
-                            type='text'
-                            value={company_u}
-                            onChange={(e) => setCompany(e.target.value)}
-                            placeholder="Raison sociale de l'entreprise"
-                        />
-                        <input
-                            className="inputBox"
-                            name="siret_u"
-                            type='text'
-                            value={siret_u}
-                            onChange={(e) => setSiret(e.target.value)}
-                            placeholder="SIRET"
-                        />
-                    </div>
-                    <div className="inputLogin">
-                        <input
-                            className="inputBox"
-                            type='text'
-                            value={address_u}
-                            name="address_u"
-                            onChange={(e) => setAdress(e.target.value)}
-                            placeholder="Adresse de votre entreprise"
-                        />
-                        <input
-                            className="inputBox"
-                            type='text'
-                            value={zipCode_u}
-                            name="zipCode_u"
-                            onChange={(e) => setZipCode(e.target.value)}
-                            placeholder="CP"
-                        />
-                        <input
-                            className="inputBox"
-                            type='text'
-                            value={country_u}
-                            name="country_u"
-                            onChange={(e) => setCountry(e.target.value)}
-                            placeholder="Pays"
-                        />
-                    </div>
-                    <div className="inputLogin">
-                        <input
-                            className="inputBox"
-                            name="phone_u"
-                            type='text'
-                            value={phone_u}
-                            onChange={(e) => setPhone(e.target.value)}
-                            placeholder="Téléphone"
-                        />
-                        <input
-                            className="inputBox"
-                            name="email"
-                            type='text'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Adresse e-mail"
-                        />
-                    </div>
-                    <div className="inputLogin">
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            className="inputBox text-center"
-                            placeholder="Mot de passe"
-                        />
-                        <input
-                            type="password"
-                            onChange={e => setPasswordAgain(e.target.value)}
-                            className="inputBox"
-                            placeholder="Confirmation mot de passe"
-                        />
-                        <input
-                            type="hidden"
-                            onChange={e => setKey_r(e.target.value)}
-                        />
+                <form className="testform" onSubmit={handleSubmit(onSubmit)}>
+                <legend className="titleRegister">Formulaire inscription</legend>
+                    <label>Votre nom :</label>
+                    <input
+                        className="inputBox"
+                        placeholder="NOM"
+                        {...register("lastName_u", {
+                            required: true,
+                            pattern: /^[A-Za-z]+$/i
+                        })}
+                    />
+                    {errors?.lastName_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.lastName_u?.type === "pattern" && (
+                        <p className="text-error">Caractères alphabétiques uniquement</p>
+                    )}
 
+                    <label>Votre prénom :</label>
+                    <input
+                        className="inputBox"
+                        placeholder="PRÉNOM"
+                        {...register("firstName_u", {
+                            required: true,
+                            pattern: /^[A-Za-z]+$/i
+                        })}
+                    />
+                    {errors?.firstName_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.firstName_u?.type === "pattern" && (
+                        <p className="text-error">Caractères alphabétiques uniquement</p>
+                    )}
+                
+                    <label>Nom de votre entreprise :</label>
+                    <input
+                        className="inputBox"
+                        placeholder="RAISON SOCIALE"
+                        {...register("company_u", {
+                            required: true,
+                            pattern: /^[A-Za-z]+$/i
+                        })}
+                    />
+                    {errors?.company_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.company_u?.type === "pattern" && (
+                        <p className="text-error">Caractères alphabétiques uniquement</p>
+                    )}
+
+                    <label>Siret :</label>
+                    <input
+                        className="inputBox"
+                        placeholder="SIRET"
+                        {...register("siret_u", {
+                            required: true,
+                            minLength: 14,
+                            maxLength: 14,
+                            pattern: /^[0-9]+$/i
+                        })}
+                    />
+                    {errors?.siret_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.siret_u?.type === "minLength" && (
+                        <p className="text-error">Numéro de SIRET invalide</p>
+                    )}
+                    {errors?.siret_u?.type === "maxLength" && (
+                        <p className="text-error">Numéro de SIRET invalide</p>
+                    )}
+                    {errors?.siret_u?.type === "pattern" && (
+                        <p className="text-error">Caractères alphabétiques uniquement</p>
+                    )}
+                
+                    <label>Adresse :</label>
+                    <input
+                    className="inputBox"
+                    placeholder="ADRESSE"
+                        {...register("address_u", {
+                            required: true,
+                            pattern: /^[A-Za-z0-9 ]+$/i
+                        })}
+                    />
+                    {errors?.address_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.address_u?.type === "pattern" && (
+                        <p className="text-error">Caractères alphabétiques uniquement</p>
+                    )}
+
+                    <label>Code postale :</label>
+                    <input
+                    className="inputBox"
+                    placeholder="CODE POSTALE"
+                        {...register("zipCode_u", {
+                            required: true,
+                            minLength: 5,
+                            maxLength: 5,
+                            pattern: /^[0-9]+$/i
+                        })}
+                    />
+                    {errors?.zipCode_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.zipCode_u?.type === "minLength" && (
+                        <p className="text-error">Code postale invalide</p>
+                    )}
+                    {errors?.zipCode_u?.type === "maxLength" && (
+                        <p className="text-error">Code postale invalide</p>
+                    )}
+                    {errors?.zipCode_u?.type === "pattern" && (
+                        <p className="text-error">Caractères alphabétiques uniquement</p>
+                    )}
+
+                    <label>Pays :</label>
+                    <input
+                    className="inputBox"
+                    placeholder="PAYS"
+                        {...register("country_u", {
+                            required: true,
+                            pattern: /^[A-Za-z]+$/i
+                        })}
+                    />
+                    {errors?.country_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.country_u?.type === "pattern" && (
+                        <p className="text-error">Caractères alphabétiques uniquement</p>
+                    )}
+
+                    <label>Téléphone :</label>
+                    <input
+                    className="inputBox"
+                    placeholder="TÉLÉPHONE"
+                        {...register("phone_u", {
+                            required: true,
+                            minLength: 10,
+                            maxLength: 10,
+                            pattern: /^[0-9]+$/i
+                        })}
+                    />
+                    {errors?.phone_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.phone_u?.type === "minLength" && (
+                        <p className="text-error">Numéro de téléphone invalide.</p>
+                    )}
+                    {errors?.phone_u?.type === "maxLength" && (
+                        <p className="text-error">Numéro de téléphone invalide.</p>
+                    )}
+                    {errors?.phone_u?.type === "pattern" && (
+                        <p className="text-error">Caractères alphabétiques uniquement</p>
+                    )}
+
+                    <label>Adresse email :</label>
+                    <input
+                    className="inputBox"
+                    placeholder="EMAIL"
+                        {...register("email", {
+                            required: true,
+                            pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i
+                        })}
+                    />
+                    {errors?.email?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.email?.type === "pattern" && (
+                        <p className="text-error">Adresse email invalide.</p>
+                    )}
+
+                    <label>Mot de passe :</label>
+                    <input
+                    type='password'
+                    className="inputBox"
+                    placeholder="MOT DE PASSE"
+                        {...register("password", {
+                            required: true,
+                            minLength: 8,
+                        })}
+                    />
+                    {errors?.password?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.password?.type === "minLength" && (
+                        <p className="text-error">Minimum 8 caractères.</p>
+                    )}
+
+                    <input
+                        value={3}
+                        type='hidden'
+                        className="inputBox"
+                        placeholder="key"
+                        {...register("key_r")
+                        }
+                    />
+                    <div className="d-flex justify-content-center">
+                        <input
+                            className="submitBox"
+                            type="submit"
+                            />
                     </div>
-                </div>
-                <PasswordChecklist
-                    className="text-white d-flex flex-column align-items-center fs-5 mt-4"
-                    rules={["minLength", "specialChar", "number", "capital", "match"]}
-                    minLength={8}
-                    value={password}
-                    valueAgain={passwordAgain}
-                    onChange={(isValid) => { }}
-                    messages={{
-                        minLength: "Longueur de 8 caractères minimum.",
-                        specialChar: "Un caractère spécial.",
-                        number: "Un chiffre.",
-                        capital: "Une lettre majuscule.",
-                        match: "Match parnis les deux ;)"
-                    }}
-                />
-                <div className="d-flex justify-content-center">
-                    <button
-                        type="button"
-                        onClick={collectData}
-                        className="submitBox">pret à voler
-                    </button>
-                </div>
+                    </form>
             </div>
         </>
     )
