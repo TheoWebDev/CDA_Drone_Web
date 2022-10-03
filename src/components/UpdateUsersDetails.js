@@ -20,7 +20,7 @@ const UpdateUsersDetails = () => {
             phone_u: authParsed.user.phone_u,
             address_u: authParsed.user.address_u,
             zipCode_u: authParsed.user.zipCode_u,
-            country_u: authParsed.user.country_u,
+            city_u: authParsed.user.city_u,
             siret_u: authParsed.user.siret_u,
         }
     )
@@ -181,9 +181,9 @@ const UpdateUsersDetails = () => {
                                 type="text"
                                 className="form-control"
                                 id="staticAddress"
-                                placeholder={authParsed.user.country_u}
-                                name="country_u"
-                                value={formData.country_u}
+                                placeholder={authParsed.user.city_u}
+                                name="city_u"
+                                value={formData.city_u}
                                 onChange={event => handleInputChange(event)}
                             />
                         </div>

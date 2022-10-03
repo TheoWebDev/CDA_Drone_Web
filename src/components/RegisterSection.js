@@ -40,7 +40,7 @@ const RegisterSection = () => {
                         placeholder="NOM"
                         {...register("lastName_u", {
                             required: true,
-                            pattern: /^[A-Za-z]+$/i
+                            pattern: /^[A-Za-zèéêëôàáâä -]+$/i
                         })}
                     />
                     {errors?.lastName_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
@@ -54,7 +54,7 @@ const RegisterSection = () => {
                         placeholder="PRÉNOM"
                         {...register("firstName_u", {
                             required: true,
-                            pattern: /^[A-Za-z]+$/i
+                            pattern: /^[A-Za-zèéêëôàáâä -]+$/i
                         })}
                     />
                     {errors?.firstName_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
@@ -68,7 +68,7 @@ const RegisterSection = () => {
                         placeholder="RAISON SOCIALE"
                         {...register("company_u", {
                             required: true,
-                            pattern: /^[A-Za-z]+$/i
+                            pattern: /^[A-Za-zèéêëôàáâä -]+$/i
                         })}
                     />
                     {errors?.company_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
@@ -104,7 +104,7 @@ const RegisterSection = () => {
                     placeholder="ADRESSE"
                         {...register("address_u", {
                             required: true,
-                            pattern: /^[A-Za-z0-9 ]+$/i
+                            pattern: /^[A-Za-z0-9 -]+$/i
                         })}
                     />
                     {errors?.address_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
@@ -134,17 +134,17 @@ const RegisterSection = () => {
                         <p className="text-error">Caractères alphabétiques uniquement</p>
                     )}
 
-                    <label>Pays :</label>
+                    <label>Ville :</label>
                     <input
                     className="inputBox"
-                    placeholder="PAYS"
-                        {...register("country_u", {
+                    placeholder="VILLE"
+                        {...register("city_u", {
                             required: true,
-                            pattern: /^[A-Za-z]+$/i
+                            pattern: /^[A-Za-zèéêëôàáâä -]+$/i
                         })}
                     />
-                    {errors?.country_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
-                    {errors?.country_u?.type === "pattern" && (
+                    {errors?.city_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                    {errors?.city_u?.type === "pattern" && (
                         <p className="text-error">Caractères alphabétiques uniquement</p>
                     )}
 

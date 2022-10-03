@@ -140,8 +140,8 @@ function UsersDetails() {
                                 type="text"
                                 className="form-control"
                                 id="staticAddress"
-                                placeholder={authParsed.user.country_u}
-                                name="country_u"
+                                placeholder={authParsed.user.city_u}
+                                name="city_u"
                                 disabled
                             />
                         </div>

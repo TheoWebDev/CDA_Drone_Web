@@ -5,7 +5,7 @@ import './RegisterSection.css'
 import { useNavigate } from "react-router-dom"
 import { useGlobalState } from '../App'
 import { notify, ToastRenderer } from '../components/ToastNotification'
-import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form"
 
 const SignInSection = () => {
     const [state, dispatch] = useGlobalState()
