@@ -24,32 +24,27 @@ function toBase64(arr) {
 const handleDragStart = (e) => e.preventDefault()
 
 const ProductPage = ({ drone }) => {
-	const [image, setImage] = useState({})
+	const [image, setImage] = useState([])
 	const [load, setLoad] = useState(true)
 
-	let arrImg = []
 	
 	useEffect(() => {
+		let arrImg = []
 		fetch(`${process.env.REACT_APP_BASE_URL}/images/` + drone._id)
 			.then(response => response.json())
 			.then(data => {
 				for (const element of data) {
 					const url = `data:image/png;base64,${toBase64(element.img.data)}`
-					arrImg.push(url)
-					setLoad(false)
+					arrImg.push(<img src={url} onDragStart={handleDragStart} alt="presentation" />)
 				}
-				setImage(arrImg)
+				setLoad(false)
+
 			})
+
+		setImage(arrImg)
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
-	const images =
-		[
-			<img src={image[0]} onDragStart={handleDragStart} alt="presentation" />,
-			<img src={image[1]} onDragStart={handleDragStart} alt="presentation" />,
-			<img src={image[2]} onDragStart={handleDragStart} alt="presentation" />,
-			<img src={image[3]} onDragStart={handleDragStart} alt="presentation" />,
-		]
 
 	const {
 		items,
@@ -165,7 +160,7 @@ const ProductPage = ({ drone }) => {
 		background-color: white;
 		.logo {
 			font-size: 3rem;
-			color: ${modalSettings.color};
+			color: #40be40;
 		}
 		`
 
@@ -198,7 +193,7 @@ const ProductPage = ({ drone }) => {
 						600: { items: 1 },
 						1000: { items: 1 },
 					}}
-					items={images} />
+					items={image} />
 			}
 			</div>
 			<div className="productDesc"  >

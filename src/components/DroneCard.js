@@ -32,11 +32,11 @@ const DroneCard = ({ drone }) => {
 			{load ?
 				<ContentLoader
 					speed={2}
-					viewBox="0 0 400 160"
+					viewBox="0 0 400 200"
 					backgroundColor="#f3f3f3"
 					foregroundColor="#dddddd"
 				>
-					<rect x="0" y="0" rx="0" ry="0" width="100%" height="600" />
+					<rect x="0" y="0" rx="0" ry="0" width="100%" height="100%" />
 				</ContentLoader>
 				: (
 					<img src={image} alt="" className='cards__item__img'></img>

@@ -64,7 +64,7 @@
   .cards__item__pic-wrap {
     position: relative;
     width: 100%;
-    padding-top: 67%;
+    /* padding-top: 67%; */
     overflow: hidden;
   }
   
@@ -88,7 +88,6 @@
   }
   
   .cards__item__img {
-    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
@@ -100,6 +99,8 @@
     max-height: 100%;
     object-fit: cover;
     transition: all 0.2s linear;
+    aspect-ratio: 16/9;
+
   }
   
   .cards__item__img:hover {

@@ -10,7 +10,7 @@ h1{
 .about{
     height: auto;
     background-color: whitesmoke;
-    padding-top: 3rem;
+    padding-bottom: 2rem;
 }
 
 .sectionPresentation{
@@ -21,20 +21,21 @@ h1{
 
 .sectionReferences{
     display: flex;
-	flex-direction: column;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 .contentAbout{
     /* margin-top: 1rem; */
 	width: 100%;
-	padding-right: 2%;
 	text-align: justify;
+    padding-left: 5%;
 }
 
 .textAbout{
 	padding-top: 5%;
-    padding-left: 5%;
 	letter-spacing: 0.5px;
 }
 
@@ -89,4 +90,16 @@ h1{
         margin: 5%;
         width: 75%;
     }
+}
+
+@media screen and (max-width:1200px){
+    .sectionPresentation {
+        flex-wrap: wrap-reverse;
+    }
+}
+
+.about h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 3rem 0 2rem 0;
 }

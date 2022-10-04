@@ -8,6 +8,7 @@
     align-items: center;
     box-shadow: inset 0 0 0 1000px rgb(0,0,0,0.2);
     object-fit: contain;
+    position: relative;
 }
 
 .gif{
@@ -52,5 +53,40 @@
     .hero-container > p{
         font-size: 18px;
         text-align: center;
+    }
+}
+
+.scroll {
+    position: absolute;
+    bottom: 20%;
+    justify-self: flex-end;
+    width: 30px;
+    height: 70px;
+    border: 2px solid white;
+    border-radius: 1rem;
+}
+
+.scroll::before {
+    content: "";
+    position: absolute;
+    width: 19px;
+    height: 35px;
+    background-color: white;
+    border-radius: 2rem;
+    left: 50%;
+    top: 4px;
+    transform: translate(-50%, 0);
+    animation: scroll 2s infinite;
+}
+
+@keyframes scroll {
+    0% {
+        top: 4px;
+    }
+    40% {
+        top: calc(100% - 39px);
+    }
+    100% {
+        top: 4px;
     }
 }
