@@ -12,24 +12,47 @@ import * as locales from 'react-date-range/dist/locale'
 import Modal from 'styled-react-modal'
 import { BsFillCheckCircleFill, BsFillXCircleFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
+import ContentLoader from 'react-content-loader'
+
+function toBase64(arr) {
+	//arr = new Uint8Array(arr) if it's an ArrayBuffer
+	return btoa(
+		arr.reduce((data, byte) => data + String.fromCharCode(byte), '')
+	)
+}
 
 const handleDragStart = (e) => e.preventDefault()
 
 const ProductPage = ({ drone }) => {
-	const images = [
-		<img src={`/images/${drone._id}-1.png`} onDragStart={handleDragStart} alt="presentation" />,
-		<img src={`/images/${drone._id}-2.png`} onDragStart={handleDragStart} alt="presentation" />,
-		<img src={`/images/${drone._id}-3.png`} onDragStart={handleDragStart} alt="presentation" />,
-	]
+	const [image, setImage] = useState({})
+	const [load, setLoad] = useState(true)
+
+	let arrImg = []
+	
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_BASE_URL}/images/` + drone._id)
+			.then(response => response.json())
+			.then(data => {
+				for (const element of data) {
+					const url = `data:image/png;base64,${toBase64(element.img.data)}`
+					arrImg.push(url)
+					setLoad(false)
+				}
+				setImage(arrImg)
+			})
+	}, [])
+
+	const images =
+		[
+			<img src={image[0]} onDragStart={handleDragStart} alt="presentation" />,
+			<img src={image[1]} onDragStart={handleDragStart} alt="presentation" />,
+			<img src={image[2]} onDragStart={handleDragStart} alt="presentation" />,
+			<img src={image[3]} onDragStart={handleDragStart} alt="presentation" />,
+		]
+
 	const {
-		isEmpty,
-		totalUniqueItems,
 		items,
-		updateItemQuantity,
-		updateItem,
-		removeItem,
-		cartTotal,
-		totalItems
+		updateItem
 	} = useCart()
 
 	const [state, setState] = useState({
@@ -84,8 +107,6 @@ const ProductPage = ({ drone }) => {
 	drone.id = drone._id
 	drone.price = drone.pricePerDay_d
 
-
-
 	const { addItem } = useCart()
 	let category = drone.category_info ?? (drone.category_id ? drone.category_id : 'Inconnu')
 
@@ -128,7 +149,6 @@ const ProductPage = ({ drone }) => {
 		}
 	}
 
-
 	const StyledModal = Modal.styled`
 		width: 20rem;
 		height: auto;
@@ -154,6 +174,15 @@ const ProductPage = ({ drone }) => {
 	return (
 		<div className="cards_container m-auto d-flex my-5">
 			<div className="productCarousel" >
+			{load ?
+				<ContentLoader
+					height={200}
+					backgroundColor="#f3f3f3"
+					foregroundColor="#dddddd"
+				>
+					<rect x="30" y="30" rx="0" ry="0" width="100%" height="300" />
+				</ContentLoader>
+			:
 				<AliceCarousel
 					mouseTracking
 					autoPlay
@@ -168,6 +197,7 @@ const ProductPage = ({ drone }) => {
 						1000: { items: 1 },
 					}}
 					items={images} />
+			}
 			</div>
 			<div className="productDesc"  >
 				<div className="cards__item__info">

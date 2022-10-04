@@ -8,7 +8,7 @@ import { notify, ToastRenderer } from '../components/ToastNotification'
 import { useForm } from "react-hook-form"
 
 const SignInSection = () => {
-    const [state, dispatch] = useGlobalState()
+    const [, dispatch] = useGlobalState()
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [message, setMessage] = useState({
