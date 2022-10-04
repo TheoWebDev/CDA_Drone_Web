@@ -40,6 +40,7 @@ const ProductPage = ({ drone }) => {
 				}
 				setImage(arrImg)
 			})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const images =
@@ -89,6 +90,7 @@ const ProductPage = ({ drone }) => {
 				}))
 			}
 		})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {
