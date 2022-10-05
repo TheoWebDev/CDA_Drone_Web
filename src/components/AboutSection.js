@@ -22,8 +22,8 @@ function AboutSection() {
 
 				<div className='container-fluid'>
 					<h2>Nos Références</h2>
-					<div className='row  my-5'>
-						<div className="sectionReferences col-6">
+					<div className='row  my-5 g-5'>
+						<div className="sectionReferences col-12 col-xl-6">
 							<img src="images/AXA-logo.png" className="imgBio2" alt="AXA-logo"></img>
 							<img src="images/Bouygues-logo.png" className="imgBio2" alt="Bouygues-logo"></img>
 							<img src="images/eiffage-logo.png" className="imgBio2" alt="eiffage-logo"></img>
@@ -33,7 +33,7 @@ function AboutSection() {
 							<img src="images/VINCI-logo.png" className="imgBio2" alt="VINCI-logo"></img>
 							<img src="images/WB-logo.png" className="imgBio2" alt="WB-logo"></img>
 						</div>
-						<div className="col-6 d-flex justify-content-center">
+						<div className="col-12 col-xl-6 d-flex justify-content-center">
 							<ReactPlayer url='https://www.youtube.com/watch?v=1U2aVQDbJ3o' />
 						</div>
 					</div>
