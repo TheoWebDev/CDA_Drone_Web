@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useParallax } from 'react-scroll-parallax'
 
 import './UsersDetails.css'
 
@@ -7,7 +8,7 @@ function UsersDetails() {
     const [users, setUsers] = useState([])
     const auth = localStorage.getItem('user')
     const authParsed = JSON.parse(auth)
-
+    const { ref } = useParallax({ speed: -10 })
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetch(`${process.env.REACT_APP_BASE_URL}users/${authParsed.user._id}`, {
@@ -25,150 +26,131 @@ function UsersDetails() {
 
     return (
         <>
-            <div className='detailsUsers text-white'>
-                <h1 className='titleServices text-white my-5'>mes informations personnelles</h1>
-
-                <div className='container'>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticLastname" className="col-3 col-md-2 col-form-label ">Nom</label>
-                        <div className="col-9 col-md-6">
+            <div className='detailsUsers '>
+                <div className='hero'>
+                    <div className="hero_overlay" ref={ref}>
+                        <img src='./images/hero_product.jpg' alt='drone' className='hero__img'></img>
+                    </div>
+                    <h1 className='titleDrone'>mes informations personnelles</h1>
+                </div>
+                <div className='container my-5'>
+                    <div className=" d-flex flex-wrap">
+                        <div className="me-3 mb-3">
+                            <label htmlFor="lastName" className="form-label">Nom</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticLastname"
+                                id="lastName"
                                 placeholder={authParsed.user.lastName_u}
                                 name="lastName_u"
                                 disabled
                             />
                         </div>
-                    </div>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticFirstname" className="col-3 col-md-2 col-form-label">Prénom</label>
-                        <div className="col-9 col-md-6">
+                        <div className='me-3 mb-3'>
+                            <label htmlFor="firstName" className="form-label">Prénom</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticFirstname"
+                                id="firstName"
                                 placeholder={authParsed.user.firstName_u}
                                 name="firstName_u"
                                 disabled
-
                             />
                         </div>
                     </div>
 
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticEmail" className="col-3 col-md-2 col-form-label">Email</label>
-                        <div className="col-9 col-md-6">
+                    <div className=" d-flex flex-wrap">
+                        <div className="me-3 mb-3">
+                            <label htmlFor="email" className="form-label">Adresse mail</label>
                             <input
-                                type="email"
+                                    type="email"
+                                    className="form-control w-auto"
+                                    id="email"
+                                    name="email"
+                                    value={authParsed.user.email}
+                                    disabled
+                                />
+                        </div>
+                        <div className="me-3 mb-3">
+                            <label htmlFor="phone" className="form-label">Téléphone</label>
+                            <input
+                                type="text"
                                 className="form-control"
-                                id="staticEmail"
-                                placeholder={authParsed.user.email}
-                                name="email"
+                                id="phone"
+                                placeholder={authParsed.user.phone_u}
+                                name="phone_u"
                                 disabled
                             />
                         </div>
                     </div>
 
 
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticCompany" className="col-3 col-md-2 col-form-label">Entreprise</label>
-                        <div className="col-9 col-md-6">
+                    <div className=" d-flex flex-wrap">
+                        <div className="mb-3  me-3">
+                            <label htmlFor="comanyName" className="form-label">Nom de l'entreprise</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticCompany"
+                                id="comanyName"
                                 placeholder={authParsed.user.company_u}
                                 name="company_u"
                                 disabled
-
                             />
                         </div>
-                    </div>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticCompany" className="col-3 col-md-2 col-form-label">Siret</label>
-                        <div className="col-9 col-md-6">
+                        <div className="mb-3 me-3">
+                            <label htmlFor="siret" className="form-label">Siret de l'entreprise</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticCompany"
+                                id="siret"
                                 placeholder={authParsed.user.siret_u}
                                 name="siret_u"
                                 disabled
-
                             />
                         </div>
                     </div>
 
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticAddress" className="col-3 col-md-2 col-form-label">Adresse</label>
-                        <div className="col-9 col-md-6">
+                    <div className=" d-flex flex-wrap">
+                        <div className="mb-3 me-3">
+                            <label htmlFor="address" className="form-label">Adresse</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticAddress"
+                                id="address"
                                 placeholder={authParsed.user.address_u}
                                 name="address_u"
                                 disabled
                             />
                         </div>
-                    </div>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticAddress" className="col-3 col-md-2 col-form-label">Code Postale</label>
-                        <div className="col-9 col-md-6">
+                        <div className="mb-3 me-3">
+                            <label htmlFor="zipcode" className="form-label">Code postale</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticAddress"
+                                id="zipcode"
                                 placeholder={authParsed.user.zipCode_u}
                                 name="zipCode_u"
                                 disabled
                             />
                         </div>
-                    </div>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticAddress" className="col-3 col-md-2 col-form-label">Pays</label>
-                        <div className="col-9 col-md-6">
+                        <div className="mb-3">
+                            <label htmlFor="country" className="form-label">Ville</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticAddress"
+                                id="country"
                                 placeholder={authParsed.user.city_u}
                                 name="city_u"
                                 disabled
                             />
                         </div>
                     </div>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticPhone" className="col-3 col-md-2 col-form-label">Téléphone</label>
-                        <div className="col-9 col-md-6">
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="staticPhone"
-                                placeholder={authParsed.user.phone_u}
-                                name="phone_u"
-                                disabled
-
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="d-flex align-items-center justify-content-center">
-                    <Link to='/updateuserdetails'>
-                        <button
-                            type="submit"
-                            className="submitBox">modifier mes informations
-                        </button>
-                    </Link>
+                        <Link to='/updateuserdetails'>
+                            <button
+                                type="submit"
+                                className="submitBox mt-3">modifier mes informations
+                            </button>
+                        </Link>
                 </div>
             </div>
         </>

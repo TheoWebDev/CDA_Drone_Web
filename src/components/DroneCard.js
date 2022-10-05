@@ -45,12 +45,12 @@ const DroneCard = ({ drone }) => {
 		<div className="cards__item__info">
 			<h5 className="cards__item__text">{drone.name_d}</h5>
 			<hr></hr>
-				<footer className='d-flex align-items-center justify-content-between'>
-					<span className="cards__item__price">{drone.pricePerDay_d}€/jours</span>
-					<span className="cards__item__dispo">En Stock</span>
-				</footer>
+			<footer className='d-flex align-items-center justify-content-between'>
+				<span className="cards__item__price">{drone.pricePerDay_d}€ / jours</span>
+				<span className="cards__item__dispo">En Stock</span>
+			</footer>
 			</div>
-			<button className="btnRegister" >Réserver</button>
+			<button className="btnRegister" >Découvrir</button>
 		</div>
 	)
 }

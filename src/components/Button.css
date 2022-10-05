@@ -12,7 +12,6 @@
     outline: none;
     cursor: pointer;
     text-transform: uppercase;
-    letter-spacing: 1px;
     background-color: #229ee4;
     border: 1px solid #229ee4;
     color: #fff;
@@ -65,10 +64,8 @@
 }
 
 .btnRegister:hover{
-    background: gray;
-    border-color: gray;
-    color: #fff;
-    transition: all 0.3s ease-out;
+    background: transparent;
+    color: #229ee4;
     text-decoration: none;
 }
 

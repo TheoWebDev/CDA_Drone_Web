@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
 .hero-container{
-    background: url('../../public/images/img-home.png') center center/cover no-repeat;
+    background: url('../../public/images/img-home.jpg') center center/cover no-repeat;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -18,19 +19,25 @@
 }
 
 .hero-container > h1{
+    font-family: 'Kumbh Sans', sans-serif;
     color: #fff;
     font-size: 90px;
     margin-top: -100px;
-    letter-spacing: 5px;
+    font-weight: bold;
+    backdrop-filter: sepia(1);
+    width: 100%;
+/*     letter-spacing: 5px; */
 }
 
 .hero-container > p{
     margin-top: 10px;
     margin-bottom: 25px;
-    color: #fff;
+    color: #3caae9;
     font-size: 28px;
-    letter-spacing: 1px;
     font-family: 'Roboto', sans-serif;
+    backdrop-filter: brightness(0.5);
+    width: 100%;
+    text-align: center;
 }
 
 .hero-btns{

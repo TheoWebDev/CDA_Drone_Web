@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import { useParallax } from 'react-scroll-parallax'
 import { useNavigate } from 'react-router-dom'
 import './RegisterSection.css'
 
@@ -33,7 +33,7 @@ const UpdateUsersDetails = () => {
             [name]: value
         }))
     }
-
+    const { ref } = useParallax({ speed: -10 })
     //gere la soumission du formulaire
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -63,33 +63,34 @@ const UpdateUsersDetails = () => {
 
 
     return (
-        <><div className='detailsUsers text-white '>
-            <h1 className="titleServices my-5">Modifier mes informations</h1>
+        <><div className='detailsUsers '>
+            <div className='hero'>
+                    <div className="hero_overlay" ref={ref}>
+                        <img src='./images/hero_product.jpg' alt='drone' className='hero__img'></img>
+                    </div>
+                    <h1 className='titleDrone'>mes informations personnelles</h1>
+                </div>
             <form onSubmit={event => handleSubmit(event)}>
-                <div className='container'>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticLastname" className="col-3 col-md-2 col-form-label">Nom</label>
-                        <div className="col-9 col-md-6">
+                <div className='container my-5'>
+                    <div className=" d-flex flex-wrap">
+                        <div className="me-3 mb-3">
+                            <label htmlFor="lastName" className="form-label">Nom</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticLastname"
+                                id="lastName"
                                 placeholder={authParsed.user.lastName_u}
                                 name="lastName_u"
                                 value={formData.lastName_u}
                                 onChange={event => handleInputChange(event)}
                             />
                         </div>
-                    </div>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticFirstname" className="col-3 col-md-2 col-form-label">Prénom</label>
-                        <div className="col-9 col-md-6">
+                        <div className='me-3 mb-3'>
+                            <label htmlFor="firstName" className="form-label">Prénom</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticFirstname"
+                                id="firstName"
                                 placeholder={authParsed.user.firstName_u}
                                 name="firstName_u"
                                 value={formData.firstName_u}
@@ -98,44 +99,51 @@ const UpdateUsersDetails = () => {
                         </div>
                     </div>
 
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticEmail" className="col-3 col-md-2 col-form-label">Email</label>
-                        <div className="col-9 col-md-6">
+                    <div className=" d-flex flex-wrap">
+                        <div className="me-3 mb-3">
+                            <label htmlFor="email" className="form-label">Adresse mail</label>
                             <input
-                                type="email"
+                                    type="email"
+                                    className="form-control w-auto"
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={event => handleInputChange(event)}
+                                />
+                        </div>
+                        <div className="me-3 mb-3">
+                            <label htmlFor="phone" className="form-label">Téléphone</label>
+                            <input
+                                type="text"
                                 className="form-control"
-                                id="staticEmail"
-                                name="email"
-                                value={formData.email}
+                                id="phone"
+                                placeholder={authParsed.user.phone_u}
+                                name="phone_u"
+                                value={formData.phone_u}
                                 onChange={event => handleInputChange(event)}
                             />
                         </div>
                     </div>
 
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticCompany" className="col-3 col-md-2 col-form-label">Entreprise</label>
-                        <div className="col-9 col-md-6">
+                    <div className=" d-flex flex-wrap">
+                        <div className="mb-3  me-3">
+                            <label htmlFor="comanyName" className="form-label">Nom de l'entreprise</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticCompany"
+                                id="comanyName"
                                 placeholder={authParsed.user.company_u}
                                 name="company_u"
                                 value={formData.company_u}
                                 onChange={event => handleInputChange(event)}
                             />
                         </div>
-                    </div>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticCompany" className="col-3 col-md-2 col-form-label">Siret</label>
-                        <div className="col-9 col-md-6">
+                        <div className="mb-3 me-3">
+                            <label htmlFor="siret" className="form-label">Siret de l'entreprise</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticCompany"
+                                id="siret"
                                 placeholder={authParsed.user.siret_u}
                                 name="siret_u"
                                 value={formData.siret_u}
@@ -143,44 +151,37 @@ const UpdateUsersDetails = () => {
                             />
                         </div>
                     </div>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticAddress" className="col-3 col-md-2 col-form-label">Adresse</label>
-                        <div className="col-9 col-md-6">
+                    <div className=" d-flex flex-wrap">
+                        <div className="mb-3 me-3">
+                            <label htmlFor="address" className="form-label">Adresse</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticAddress"
+                                id="address"
                                 placeholder={authParsed.user.address_u}
                                 name="address_u"
                                 value={formData.address_u}
                                 onChange={event => handleInputChange(event)}
                             />
                         </div>
-                    </div>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticAddress" className="col-3 col-md-2 col-form-label">Code Postale</label>
-                        <div className="col-9 col-md-6">
+                        <div className="mb-3 me-3">
+                            <label htmlFor="zipcode" className="form-label">Code postale</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticAddress"
+                                id="zipcode"
                                 placeholder={authParsed.user.zipCode_u}
                                 name="zipCode_u"
                                 value={formData.zipCode_u}
                                 onChange={event => handleInputChange(event)}
                             />
                         </div>
-                    </div>
-
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticAddress" className="col-3 col-md-2 col-form-label">Pays</label>
-                        <div className="col-9 col-md-6">
+                        <div className="mb-3">
+                            <label htmlFor="country" className="form-label">Ville</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="staticAddress"
+                                id="country"
                                 placeholder={authParsed.user.city_u}
                                 name="city_u"
                                 value={formData.city_u}
@@ -189,27 +190,10 @@ const UpdateUsersDetails = () => {
                         </div>
                     </div>
 
-                    <div className='row mb-3 justify-content-center fs-5'>
-                        <label htmlFor="staticPhone" className="col-3 col-md-2 col-form-label">Téléphone</label>
-                        <div className="col-9 col-md-6">
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="staticPhone"
-                                placeholder={authParsed.user.phone_u}
-                                name="phone_u"
-                                value={formData.phone_u}
-                                onChange={event => handleInputChange(event)}
-                            />
-                        </div>
-                    </div>
-                </div>
-
-
-                <div className="d-flex justify-content-center align-items-center">
+                    <div className="d-flex  align-items-center mt-3">
                     <a
                         type="button"
-                        className="submitBoxCancel"
+                        className="submitBox submitBoxCancel me-3"
                         href='/userdetails'
                     >Retour
                     </a>
@@ -219,6 +203,11 @@ const UpdateUsersDetails = () => {
                         className="submitBox">sauvgarder
                     </button>
                 </div>
+                 
+                </div>
+
+
+                
             </form>
         </div>
         </>

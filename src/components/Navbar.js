@@ -42,7 +42,7 @@ const Navbar = () => {
       <nav className='myNavbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            <span className="colorCompany">SKY</span>'DR<span className="colorCompany">O</span>NE
+            <span className="colorCompany me-1">SKY</span> DRONE
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />

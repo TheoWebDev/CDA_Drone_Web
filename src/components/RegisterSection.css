@@ -79,13 +79,11 @@
 
 .submitBox{
     display: block;
-    margin: 15px;
-    padding: 10px;
-    width: clamp(100px , 200px, 400px);
+    padding: 8px 20px;
     border: 1px solid #3caae9;
     border-radius: 25px;
     color: whitesmoke;
-    text-transform: uppercase;
+    text-transform: capitalize;
     text-align: center;
     font-weight: bold;
     letter-spacing: 1px;
@@ -94,7 +92,8 @@
 }
 
 .submitBox:hover{
-    background-color: #3caae9c4;
+    background-color: transparent;
+    color: #3caae9c4;
     border: 1px solid #3caae9c4;
     transition: all 250ms ease-out;
 }
@@ -122,25 +121,14 @@
 }
 
 .submitBoxCancel{
-    display: block;
-    margin: 15px;
-    padding: 10px;
-    width: clamp(100px , 200px, 400px);
     border: 1px solid #9c9c9c;
-    border-radius: 25px;
-    color: whitesmoke;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: bold;
-    letter-spacing: 1px;
     background-color: #9c9c9c;
-    cursor: pointer;
 }
 
 .submitBoxCancel:hover{
-    background-color: #9c9c9cc4;
     border: 1px solid #9c9c9cc4;
     transition: all 250ms ease-out;
+    color: #9c9c9cc4;
 }
 
 .inputLogin{
@@ -202,11 +190,6 @@
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
-label{
-    /* visibility: hidden; */
-    color: whitesmoke;
-    margin: 0;
-}
   
 /* .form {
     background: #0e101c;
@@ -223,7 +206,7 @@ label{
     content: "⚠ ";
 }
   
-input {
+/* input {
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -232,15 +215,5 @@ input {
     padding: 10px 15px;
     margin-bottom: 10px;
     font-size: 14px;
-}
+} */
   
-label {
-    /* line-height: 2; */
-    text-align: left;
-    /* display: block; */
-    /* margin-bottom: 13px; */
-    margin-top: 20px;
-    color: white;
-    font-size: 14px;
-    font-weight: 200;
-}

@@ -25,13 +25,18 @@
     color: #fff;
     padding: 0 1rem;
     justify-self: start;
-    letter-spacing: 2px;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
     display: flex;
     align-items: center;
     font-weight: bold;
+    font-family: 'Kumbh Sans', sans-serif;
+  }
+
+  .navbar-logo:hover {
+    transition: all 0.25s;
+    color: #229ee4;
   }
   
   .fa-typo3 {
@@ -94,6 +99,16 @@
       left: -100%;
       opacity: 1;
       transition: all 0.5s ease;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .nav-menu > * {
+      border-bottom: 1px solid rgba(153, 153, 153, 0.255);
+    }
+
+    .nav-menu > *:last-child {
+      border-bottom: none;
     }
   
     .nav-menu.active {
@@ -102,12 +117,11 @@
       opacity: 1;
       transition: all 0.5s ease;
       z-index: 1;
-      padding-bottom: 3rem;
     }
   
     .nav-links {
       text-align: center;
-      padding: 2rem;
+      padding: 1.5rem;
       width: 100%;
       display: table;
     }
@@ -118,21 +132,12 @@
       border-radius: 0;
     }
   
-    .navbar-logo {
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform: translate(25%, 50%);
-    }
-  
     .menu-icon {
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform: translate(-100%, 60%);
+      display: flex;
       font-size: 1.8rem;
       cursor: pointer;
+      align-items: center;
+      margin: 0 1rem;
     }
   
     .fa-times {

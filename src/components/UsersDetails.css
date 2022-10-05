@@ -1,9 +1,8 @@
 .detailsUsers {
-    background: url('../../public/images/img-sign3.jpg') center center/cover no-repeat;
+    /* background: url('../../public/images/img-sign3.jpg') center center/cover no-repeat; */
     height: auto;
     display: flex;
     flex-direction: column;
-    box-shadow: inset 0 0 0 1000px rgb(0, 0, 0, 0.2);
     object-fit: contain;
     /* background-color: lime; */
 }
