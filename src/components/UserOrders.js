@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { formatDate, getDays, removeDay, getDaysBetweenTwoDates } from './helper'
 import './UsersDetails.css'
-import { formatDate, getDays, removeDay } from './helper'
 
 
 function UserOrders() {
-    const [orders, setOrders] = useState([])
+    const [orders, setOrders] = useState('')
     const auth = localStorage.getItem('user')
     const authParsed = JSON.parse(auth)
+    const [orderActive, setOrderActive] = useState(0)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,11 +20,17 @@ function UserOrders() {
             })
             const allOrders = await data.json()
             setOrders(allOrders)
+            
         }
         fetchData()
-    }, [authParsed.token, authParsed.user._id])
+    }, [])
+    let order = orders[orderActive]
 
-    if (orders) {
+    const totalPrice = (date1, date2, price) => {
+        let totalDays = getDaysBetweenTwoDates(date1, date2)
+        return price * totalDays
+    }
+
         return (
             <>
             <div className='hero'>
@@ -33,26 +40,35 @@ function UserOrders() {
                 <h1 className='titleDrone'>Réservation en cours</h1>
             </div>
             
-            {orders.length > 0 ?
-                <div className="container mt-3">
-                    <ul className='d-flex flex-column'>
-                        {
-                            orders.map(order => (
-                                order.state_o === 'En attente de validation' ?
-                                    <li className='d-flex flex-column card' key={order._id}>
+                <div className="container my-5">
+                    {orders ?
+                    <div className="orderContainer row no-gutters d-flex flex-row align-items-start">
+                        <div className="col-sm-4 leftSide">
+                            <ul>
+                            {orders.map((order, key )=> (
+                                <li key={order._id} className={"miniOrder " + (orderActive == key ? "panel-active" : '')} onClick={e => setOrderActive(key)}>
+                                    <h3 className='text-uppercase'>{order.drone_id.name_d}</h3>
+                                    <p> <span>Date:</span> {formatDate(order.createdAt)} <span >Total: </span>{totalPrice(order.startAt_o, order.endAt_o, order.drone_id.pricePerDay_d)}€</p>
+                                </li>
+                            ))}
+                            </ul>
+                        </div>
+                        <ul className='d-flex flex-column rightSide col-sm-8'>
+                        { order.state_o === 'En attente de validation' ?
+                                    <li className='d-flex flex-column' key={order._id}>
                                         <div className='flex-row'>
                                             <div className='flex-column'>
                                                 <h2 className='text-uppercase text-center'>{order.drone_id.name_d}</h2>
                                                 <div className="item_image_history">
                                                     <img src={`./images/${order.drone_id._id}.png`} alt={order.drone_id.name_d} className='cart_item__img ' />
                                                 </div>
-                                                <div className='fs-5'>
+                                                <div className='fs-6'>
                                                     <p> État : <span className='text-warning' > {order.state_o}</span></p>
                                                     <p>Merci pour votre demande de réservation!</p>
                                                     <p> Votre demande est actuellement à l'étude par nos équipes. Nous vous informerons de son status très prochainement sur cette page.</p>
                                                     <p>Date de la commande : {formatDate(order.createdAt)}.</p>
                                                     <p>Réservation du {formatDate(order.startAt_o)} au {formatDate(order.endAt_o)}.</p>
-                                                    <div className='d-flex justify-content-between'>
+                                                    <div className='d-flex justify-content-between flex-wrap'>
                                                         <p>Pour toute autre demande, vous pouvez <a href="/">nous contacter</a></p>
                                                         <p>Dernière mise à jour il y a {getDays(order.createdAt, Date.now())} jour{getDays(order.createdAt, Date.now()) > 1 ? 's' : ''}.</p>
                                                     </div>
@@ -61,14 +77,14 @@ function UserOrders() {
                                         </div>
                                     </li>
                                 : order.state_o === 'Acceptée' ?
-                                    <li className='d-flex flex-column card' key={order._id}>
+                                    <li className='d-flex flex-column' key={order._id}>
                                         <div className='flex-row'>
                                             <div className='flex-column'>
                                                 <h2 className='text-uppercase text-center'>{order.drone_id.name_d}</h2>
                                                 <div className="item_image_history">
                                                     <img src={`./images/${order.drone_id._id}.png`} alt={order.drone_id.name_d} className='cart_item__img ' />
                                                 </div>
-                                                <div className='fs-5'>
+                                                <div className='fs-6'>
                                                     <p>État : <span className='text-success'> {order.state_o}</span></p>
                                                     <p>Votre demande de réservation a été acceptée par notre équipe. Votre commande vous sera livré au plus tard le {formatDate(removeDay(order.startAt_o, 1))} à l'adresse suivante :</p>
                                                     <p>
@@ -79,7 +95,7 @@ function UserOrders() {
                                                     </p>
                                                     <p>Date de la commande : {formatDate(order.createdAt)}.</p>
                                                     <p>Réservation du {formatDate(order.startAt_o)} au {formatDate(order.endAt_o)}.</p>
-                                                    <div className='d-flex justify-content-between'>
+                                                    <div className='d-flex justify-content-between  flex-wrap'>
                                                         <p>Pour toute autre demande, vous pouvez <a href="/">nous contacter</a></p>
                                                         <p>Dernière mise à jour il y a {getDays(order.createdAt, Date.now())} jour{getDays(order.createdAt, Date.now()) > 1 ? 's' : ''}.</p>
                                                     </div>
@@ -95,7 +111,7 @@ function UserOrders() {
                                                 <div className="item_image">
                                                     <img src={`./images/${order.drone_id._id}.png`} alt={order.drone_id.name_d} className='cart_item__img ' />
                                                 </div>
-                                                <div className='fs-5'>
+                                                <div className='fs-6'>
                                                     <p>État : <span className='text-danger'> {order.state_o}</span></p>
                                                     <p>Veuillez <a href='/'> nous contacter</a> pour plus de détails.</p>
                                                     <p>Date de la commande : {formatDate(order.createdAt)}.</p>
@@ -112,7 +128,7 @@ function UserOrders() {
                                                 <div className="item_image">
                                                     <img src={`./images/${order.drone_id._id}.png`} alt={order.drone_id.name_d} className='cart_item__img ' />
                                                 </div>
-                                                <div className='fs-5'>
+                                                <div className='fs-6'>
                                                     <p>État : <span className='text-info'> {order.state_o}</span></p>
                                                     <p>Il reste {getDays(Date.now(), order.endAt_o)} jours de location.</p>
                                                     <p>Date de la commande : {formatDate(order.createdAt)}.</p>
@@ -131,7 +147,7 @@ function UserOrders() {
                                                 <div className="item_image">
                                                     <img src={`./images/${order.drone_id._id}.png`} alt={order.drone_id.name_d} className='cart_item__img ' />
                                                 </div>
-                                                <div className='fs-5'>
+                                                <div className='fs-6'>
                                                     <p>État : <span className='text-danger'> {order.state_o}</span></p>
                                                     <p>Un probleme est survenu, nous allons vous contacter dans les plus brefs délais.</p>
                                                     <p>Date de la commande : {formatDate(order.createdAt)}.</p>
@@ -140,23 +156,17 @@ function UserOrders() {
                                             </div>
                                         </div>
                                     </li>
-                                ))}
+                                }
                         </ul>
-                    </div>
+                        </div>
                     :
                     <div className='container'>
                         <h1 className='text-center pt-5'>Aucune réservation en cours</h1>
                     </div>
-                })
+                }
+                </div>
+
             </>
         )
     }
-    else {
-        return (
-            <div className='container'>
-                <h1 className='text-center pt-5'>Aucune réservation en cours</h1>
-            </div>
-        )
-    }
-}
 export default UserOrders

@@ -61,22 +61,23 @@ const SignInSection = () => {
     return (
         <>
             <div className="signup-container ">
+            <h2 className="titleRegister">Connexion</h2>
                 <form className="testform" onSubmit={handleSubmit(onSubmit)}>
-                <legend className="titleRegister">Connexion</legend>
-                    <label>Adresse email :</label>
+                    <label className="form-label">Adresse email</label>
                     <input
-                    className="inputBox"
-                    placeholder="EMAIL"
+                    className="form-control mb-2"
                         {...register("email", {
                             required: true,
                         })}
                     />
                     {errors?.email?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
-                    <label>Mot de passe :</label>
+                    <div className="d-flex justify-content-between align-items-end">
+                        <label className="form-label">Mot de passe</label>
+                        <a href="#" className="forgot"><p className="form-label">oublié ?</p></a>
+                    </div>
                     <input
                     type='password'
-                    className="inputBox"
-                    placeholder="MOT DE PASSE"
+                    className="form-control mb-2"
                         {...register("password", {
                             required: true,
                         })}
@@ -84,11 +85,9 @@ const SignInSection = () => {
                     {errors?.password?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
                         
                     <div className="d-flex justify-content-center">
-                        <input
-                            className="submitBox"
-                            type="submit"
-                        />
+                            <button type="submit" className="submitBox mt-3 w-100">Connexion</button>
                     </div>
+                    
                 </form>
                 <ToastRenderer />
             </div>

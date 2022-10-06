@@ -34,6 +34,7 @@ function UsersDetails() {
                     <h1 className='titleDrone'>mes informations personnelles</h1>
                 </div>
                 <div className='container my-5'>
+                    <div className="userContainer">
                     <div className=" d-flex flex-wrap">
                         <div className="me-3 mb-3">
                             <label htmlFor="lastName" className="form-label">Nom</label>
@@ -151,6 +152,7 @@ function UsersDetails() {
                                 className="submitBox mt-3">modifier mes informations
                             </button>
                         </Link>
+                </div>
                 </div>
             </div>
         </>

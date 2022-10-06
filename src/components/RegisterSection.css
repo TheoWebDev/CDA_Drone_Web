@@ -1,25 +1,15 @@
-.signup-container{
-    /* background: url('../../public/images/img-sign3.jpg') center center/cover no-repeat; */
-    /* width: 100%;
-    height: 100vh; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* box-shadow: inset 0 0 0 1000px rgb(0,0,0,0.2); */
-    object-fit: contain;
-    background-color: white;
-}
-.signin-container{
-    /* background: url('../../public/images/img-sign3.jpg') center center/cover no-repeat; */
+.signin-container, .signup-container{
+    background: url('../../public/images/img-sign3.jpg') center center/cover no-repeat;
     width: 100%;
-    height: 80vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0 0 0 1000px rgb(0,0,0,0.2);
     object-fit: contain;
+    flex-grow: 1;
+    padding: 2rem 0;
+    
     /* background-color: whitesmoke; */
 }
 
@@ -30,13 +20,16 @@
 }
 
 .titleRegister{
-    letter-spacing: 2px;
     font-size: 2rem;
-    /* color: whitesmoke; */
-    color: whitesmoke;
     font-weight: bold;
     text-align: center;
-    margin : 1%;
+    font-family: 'Kumbh Sans', sans-serif;
+    color: white;
+    text-shadow: 0 0 5px black;
+    margin-bottom: 2rem;
+    width: 100%;
+    backdrop-filter: sepia(0.5);
+    padding: 0.5rem 0;
 }
 
 .background{
@@ -157,20 +150,7 @@
     .inputBox{
         border-radius: 25px;
     }
-    .signup-container{
-        height: 130vh;
-        display: flex;
-        box-shadow: inset 0 0 0 1000px rgb(0,0,0,0.2);
-        object-fit: contain;
-        /* background-color: whitesmoke; */
-    }
-    .signin-container{
-        height: 80vh;
-        display: flex;
-        box-shadow: inset 0 0 0 1000px rgb(0,0,0,0.2);
-        object-fit: contain;
-        /* background-color: whitesmoke; */
-    }
+
     .linkBtn {
         display: flex;
     }
@@ -179,15 +159,16 @@
 /* Form */
 
 .testform{
+    color: white;
     display: block;
     justify-content: center;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    max-width: 33.33vw;
-    background-color: rgb(14, 16, 28, 0.8);
-    padding: 2%;
+    min-width: 300px;
+    padding: 1rem;
     border-radius: 25px;
-    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
+    background: rgba( 0, 0, 0, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
   
@@ -217,3 +198,8 @@
     font-size: 14px;
 } */
   
+.forgot {
+    display: block;
+    color: rgba(226, 226, 226, 0.69);
+    font-size: 0.8rem;
+}

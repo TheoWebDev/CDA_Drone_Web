@@ -72,6 +72,7 @@ const UpdateUsersDetails = () => {
                 </div>
             <form onSubmit={event => handleSubmit(event)}>
                 <div className='container my-5'>
+                <div className="userContainer">
                     <div className=" d-flex flex-wrap">
                         <div className="me-3 mb-3">
                             <label htmlFor="lastName" className="form-label">Nom</label>
@@ -204,6 +205,7 @@ const UpdateUsersDetails = () => {
                     </button>
                 </div>
                  
+                </div>
                 </div>
 
 

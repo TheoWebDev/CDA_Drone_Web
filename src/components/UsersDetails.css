@@ -5,6 +5,16 @@
     flex-direction: column;
     object-fit: contain;
     /* background-color: lime; */
+    border: ;
+}
+
+.userContainer {
+    border: 1px solid rgb(203, 203, 203);
+    padding: 1rem;
+    border-radius: 6px;
+    background-color: white;
+    margin-inline: auto;
+    width: fit-content;
 }
 
 .submitSection>a {
@@ -17,8 +27,6 @@
 }
 
 .item_image_history {
-    height: auto;
-    margin: 0.4rem 1rem 1rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,4 +47,78 @@ ul {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.orderContainer {
+    border: 1px solid rgb(203, 203, 203);
+    border-radius: 6px;
+    overflow: hidden;
+
+}
+
+.leftSide {
+    background-color: whitesmoke;
+}
+
+.leftSide ul {
+    position: relative;
+    z-index: 9;
+    left: 1px;
+}
+
+.rightSide {
+    border-left: 1px solid rgb(203, 203, 203);
+    background: white;
+    
+
+}
+
+.rightSide li {
+    padding: 1.3rem;
+    font-size: 1rem;
+}
+
+.miniOrder {
+    border: 1px solid rgb(203, 203, 203);
+    border-top: none;
+    border-left: none;
+    padding: 1.5rem 1rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.miniOrder p {
+    margin: 0;
+}
+
+.miniOrder::after {
+    content: "\F79D";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    right: 15px;
+}
+
+.miniOrder span {
+    font-weight: bold;
+}
+
+.miniOrder h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.no-gutters>.col, .no-gutters>[class*=col-] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.panel-active {
+    background: white;
+    border-right: none;
+}
+
+.panel-active::after {
+    content: "";
 }

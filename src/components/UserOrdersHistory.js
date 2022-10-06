@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 function UserOrdersHistory() {
 
-    const [orders, setOrders] = useState([])
+    const [orders, setOrders] = useState('')
 
     const auth = localStorage.getItem('user')
     const authParsed = JSON.parse(auth)
@@ -24,8 +24,11 @@ function UserOrdersHistory() {
             setOrders(allOrders)
         }
         fetchData()
-    }, [authParsed.token, authParsed.user._id])
-    if (orders.length > 0) {
+    }, [])
+    console.log(orders);
+    let count = 0
+    orders && orders.map(order => order.state_o === 'Terminée' ? count++ : null)
+    console.log(count);
         return (
             <>
                 <div className='hero' >
@@ -34,10 +37,13 @@ function UserOrdersHistory() {
                     </div>
                     <h1 className='titleDrone'>Historique des réservations terminées</h1>
                 </div>
-                {
+                <div className="container mt-3" >
+
+                { orders &&
+                    count === 0 ? <h2 className='text-center'>Auncun historique de réservation</h2> 
+                    :
                     orders.map(order => order.state_o === 'Terminée' &&
-                        <div className="container mt-3" key={order._id}>
-                            <ul className='d-flex flex-column'>
+                            <ul className='d-flex flex-column' key={order._id}>
                                 <li className='d-flex flex-column card' >
                                     <div className='flex-row'>
                                         <h2 className='text-uppercase text-center'>{order.drone_id.name_d}</h2>
@@ -58,32 +64,12 @@ function UserOrdersHistory() {
                                     </div>
                                 </li>
                             </ul>
-                        </div>
                     )
                 }
-            </>
-        )
-    } else {
-        return (
-            <><div className='hero'>
-                <div className="hero_overlay">
-                    <img src='./images/hero_product.jpg' alt='drone' className='hero__img'></img>
-                </div>
-                <h1 className='titleDrone'>Historique des réservations terminées</h1>
-            </div>
-                <div className="cards_container">
-                    <div className="cardProduct"  >
-                        <div className="card__item__info">
-                            <h5 className="cards__item__text d-flex">Vous n'avez pas de commandes</h5>
-                            <hr></hr>
-                            <p className="cards__item__desc"></p>
-
                         </div>
-                    </div>
-                </div>
+
             </>
         )
-    }
 }
 
 export default UserOrdersHistory

@@ -32,112 +32,117 @@ const RegisterSection = () => {
     return (
         <>
             <div className="signup-container ">
+            <h2 className="titleRegister">Formulaire inscription</h2>
+
                 <form className="testform" onSubmit={handleSubmit(onSubmit)}>
-                <legend className="titleRegister">Formulaire inscription</legend>
-                    <label>Votre nom :</label>
-                    <input
-                        className="inputBox"
-                        placeholder="NOM"
-                        {...register("lastName_u", {
-                            required: true,
-                            pattern: /^[A-Za-zèéêëôàáâä -]+$/i
-                        })}
-                    />
-                    {errors?.lastName_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
-                    {errors?.lastName_u?.type === "pattern" && (
-                        <p className="text-error">Caractères alphabétiques uniquement</p>
-                    )}
-
-                    <label>Votre prénom :</label>
-                    <input
-                        className="inputBox"
-                        placeholder="PRÉNOM"
-                        {...register("firstName_u", {
-                            required: true,
-                            pattern: /^[A-Za-zèéêëôàáâä -]+$/i
-                        })}
-                    />
-                    {errors?.firstName_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
-                    {errors?.firstName_u?.type === "pattern" && (
-                        <p className="text-error">Caractères alphabétiques uniquement</p>
-                    )}
+                    <div className="d-flex flex-wrap">
+                        <div>
+                            <label className="form-label">Votre nom</label>
+                            <input
+                                className="form-control mb-2 w-auto me-3"
+                                {...register("lastName_u", {
+                                    required: true,
+                                    pattern: /^[A-Za-zèéêëôàáâä -]+$/i
+                                })}
+                            />
+                            {errors?.lastName_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                            {errors?.lastName_u?.type === "pattern" && (
+                                <p className="text-error">Caractères alphabétiques uniquement</p>
+                            )}
+                        </div>
+                        <div>
+                            <label className="form-label">Votre prénom</label>
+                            <input
+                                className="form-control mb-2 w-auto me-2"
+                                {...register("firstName_u", {
+                                    required: true,
+                                    pattern: /^[A-Za-zèéêëôàáâä -]+$/i
+                                })}
+                            />
+                            {errors?.firstName_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                            {errors?.firstName_u?.type === "pattern" && (
+                                <p className="text-error">Caractères alphabétiques uniquement</p>
+                            )}
+                        </div>
+                    </div>
+                    <div className="d-flex flex-wrap">
+                        <div>
+                        <label className="form-label">Nom de votre entreprise</label>
+                        <input
+                            className="form-control mb-2 w-auto me-3"
+                            {...register("company_u", {
+                                required: true,
+                                pattern: /^[A-Za-zèéêëôàáâä -]+$/i
+                            })}
+                        />
+                        {errors?.company_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                        {errors?.company_u?.type === "pattern" && (
+                            <p className="text-error">Caractères alphabétiques uniquement</p>
+                        )}
+                    </div>  
+                    <div>
+                        <label className="form-label">Siret</label>
+                        <input
+                            className="form-control mb-2 w-auto me-2"
+                            {...register("siret_u", {
+                                required: true,
+                                minLength: 14,
+                                maxLength: 14,
+                                pattern: /^[0-9]+$/i
+                            })}
+                        />
+                        {errors?.siret_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                        {errors?.siret_u?.type === "minLength" && (
+                            <p className="text-error">Numéro de SIRET invalide</p>
+                        )}
+                        {errors?.siret_u?.type === "maxLength" && (
+                            <p className="text-error">Numéro de SIRET invalide</p>
+                        )}
+                        {errors?.siret_u?.type === "pattern" && (
+                            <p className="text-error">Caractères alphabétiques uniquement</p>
+                        )}
+                    </div>
+                </div>
                 
-                    <label>Nom de votre entreprise :</label>
+                            <label className="form-label">Adresse</label>
+                            <input
+                            className="form-control mb-2"
+                                {...register("address_u", {
+                                    required: true,
+                                    pattern: /^[A-Za-z0-9 -]+$/i
+                                })}
+                            />
+                            {errors?.address_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                            {errors?.address_u?.type === "pattern" && (
+                                <p className="text-error">Caractères alphabétiques uniquement</p>
+                            )}
+                    <div className="d-flex flex-wrap">
+                        <div>
+                            <label className="form-label">Code postal</label>
+                            <input
+                            className="form-control mb-2 w-auto me-3"
+                                {...register("zipCode_u", {
+                                    required: true,
+                                    minLength: 5,
+                                    maxLength: 5,
+                                    pattern: /^[0-9]+$/i
+                                })}
+                            />
+                            {errors?.zipCode_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
+                            {errors?.zipCode_u?.type === "minLength" && (
+                                <p className="text-error">Code postale invalide</p>
+                            )}
+                            {errors?.zipCode_u?.type === "maxLength" && (
+                                <p className="text-error">Code postale invalide</p>
+                            )}
+                            {errors?.zipCode_u?.type === "pattern" && (
+                                <p className="text-error">Caractères alphabétiques uniquement</p>
+                            )}
+                        </div>
+                        <div>
+                    <label className="form-label">Ville</label>
                     <input
-                        className="inputBox"
-                        placeholder="RAISON SOCIALE"
-                        {...register("company_u", {
-                            required: true,
-                            pattern: /^[A-Za-zèéêëôàáâä -]+$/i
-                        })}
-                    />
-                    {errors?.company_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
-                    {errors?.company_u?.type === "pattern" && (
-                        <p className="text-error">Caractères alphabétiques uniquement</p>
-                    )}
-
-                    <label>Siret :</label>
-                    <input
-                        className="inputBox"
-                        placeholder="SIRET"
-                        {...register("siret_u", {
-                            required: true,
-                            minLength: 14,
-                            maxLength: 14,
-                            pattern: /^[0-9]+$/i
-                        })}
-                    />
-                    {errors?.siret_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
-                    {errors?.siret_u?.type === "minLength" && (
-                        <p className="text-error">Numéro de SIRET invalide</p>
-                    )}
-                    {errors?.siret_u?.type === "maxLength" && (
-                        <p className="text-error">Numéro de SIRET invalide</p>
-                    )}
-                    {errors?.siret_u?.type === "pattern" && (
-                        <p className="text-error">Caractères alphabétiques uniquement</p>
-                    )}
-                
-                    <label>Adresse :</label>
-                    <input
-                    className="inputBox"
-                    placeholder="ADRESSE"
-                        {...register("address_u", {
-                            required: true,
-                            pattern: /^[A-Za-z0-9 -]+$/i
-                        })}
-                    />
-                    {errors?.address_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
-                    {errors?.address_u?.type === "pattern" && (
-                        <p className="text-error">Caractères alphabétiques uniquement</p>
-                    )}
-
-                    <label>Code postale :</label>
-                    <input
-                    className="inputBox"
-                    placeholder="CODE POSTALE"
-                        {...register("zipCode_u", {
-                            required: true,
-                            minLength: 5,
-                            maxLength: 5,
-                            pattern: /^[0-9]+$/i
-                        })}
-                    />
-                    {errors?.zipCode_u?.type === "required" && <p className="text-error">Ce champs est requis.</p>}
-                    {errors?.zipCode_u?.type === "minLength" && (
-                        <p className="text-error">Code postale invalide</p>
-                    )}
-                    {errors?.zipCode_u?.type === "maxLength" && (
-                        <p className="text-error">Code postale invalide</p>
-                    )}
-                    {errors?.zipCode_u?.type === "pattern" && (
-                        <p className="text-error">Caractères alphabétiques uniquement</p>
-                    )}
-
-                    <label>Ville :</label>
-                    <input
-                    className="inputBox"
-                    placeholder="VILLE"
+                    className="form-control mb-2 w-auto me-2"
                         {...register("city_u", {
                             required: true,
                             pattern: /^[A-Za-zèéêëôàáâä -]+$/i
@@ -147,11 +152,12 @@ const RegisterSection = () => {
                     {errors?.city_u?.type === "pattern" && (
                         <p className="text-error">Caractères alphabétiques uniquement</p>
                     )}
+                    </div>
+                    </div>
 
-                    <label>Téléphone :</label>
+                    <label className="form-label">Téléphone</label>
                     <input
-                    className="inputBox"
-                    placeholder="TÉLÉPHONE"
+                    className="form-control mb-2 w-auto"
                         {...register("phone_u", {
                             required: true,
                             minLength: 10,
@@ -170,10 +176,9 @@ const RegisterSection = () => {
                         <p className="text-error">Caractères alphabétiques uniquement</p>
                     )}
 
-                    <label>Adresse email :</label>
+                    <label className="form-label">Adresse email</label>
                     <input
-                    className="inputBox"
-                    placeholder="EMAIL"
+                    className="form-control mb-2"
                         {...register("email", {
                             required: true,
                             pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i
@@ -184,11 +189,10 @@ const RegisterSection = () => {
                         <p className="text-error">Adresse email invalide.</p>
                     )}
 
-                    <label>Mot de passe :</label>
+                    <label className="form-label">Mot de passe</label>
                     <input
                     type='password'
-                    className="inputBox"
-                    placeholder="MOT DE PASSE"
+                    className="form-control mb-2 w-auto"
                         {...register("password", {
                             required: true,
                             minLength: 8,
@@ -202,17 +206,15 @@ const RegisterSection = () => {
                     <input
                         value={3}
                         type='hidden'
-                        className="inputBox"
-                        placeholder="key"
+                        className="form-control mb-2"
                         {...register("key_r")
                         }
                     />
-                    <div className="d-flex justify-content-center">
-                        <input
-                            className="submitBox"
-                            type="submit"
-                            />
-                    </div>
+                        <button className="submitBox w-100 mt-3"
+                            type="submit">
+                            Inscription
+                            </button>
+                            
                     </form>
             </div>
         </>
