@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 function UserOrdersHistory() {
 
-    const [orders, setOrders] = useState('')
+    const [orders, setOrders] = useState([])
 
     const auth = localStorage.getItem('user')
     const authParsed = JSON.parse(auth)
@@ -37,7 +37,7 @@ function UserOrdersHistory() {
                     </div>
                     <h1 className='titleDrone'>Historique des réservations terminées</h1>
                 </div>
-                <div className="container mt-3" >
+                <div className="container my-3 d-flex align-items-center justify-content-center flex-grow-1" >
 
                 { orders &&
                     count === 0 ? <h2 className='text-center'>Auncun historique de réservation</h2> 

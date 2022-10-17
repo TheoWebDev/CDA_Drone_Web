@@ -92,7 +92,7 @@ ul {
 }
 
 .miniOrder::after {
-    content: "\F79D";
+    content: "+";
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

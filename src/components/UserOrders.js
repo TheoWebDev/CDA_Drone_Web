@@ -40,7 +40,7 @@ function UserOrders() {
                 <h1 className='titleDrone'>Réservation en cours</h1>
             </div>
             
-                <div className="container my-5">
+                <div className="container my-3 d-flex align-items-center justify-content-center flex-grow-1">
                     {orders ?
                     <div className="orderContainer row no-gutters d-flex flex-row align-items-start">
                         <div className="col-sm-4 leftSide">
@@ -161,7 +161,7 @@ function UserOrders() {
                         </div>
                     :
                     <div className='container'>
-                        <h1 className='text-center pt-5'>Aucune réservation en cours</h1>
+                        <h1 className='text-center'>Aucune réservation en cours</h1>
                     </div>
                 }
                 </div>
